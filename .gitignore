@@ -1,0 +1,5 @@
+*.user
+main/bin/*
+main/obj/*
+main/*.depend
+main/*.layout
