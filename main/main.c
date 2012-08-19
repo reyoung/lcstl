@@ -4,6 +4,7 @@
 #include <stdio.h>
 int main(void)
 {
+    int i=0;
     struct vector_t_int vectora = new_vector_int();
     assert(vector_isValid(vectora));
     assert(vector_size(vectora)==0);
@@ -21,6 +22,26 @@ int main(void)
 
     destory_vector_int(&vectora);
     assert(!vector_isValid(vectora));
+
+    struct vector_t_int b = new_vector_int();
+    for(i=0;i<100;++i){
+        push_back_vector_int(&b,i);
+    }
+    for(i=0;i<100;++i){
+        assert(vector_data(b,i)==i);
+    }
+
+    reset_vector_int(&b);
+
+    for(i=0;i<100;++i){
+        push_front_vector_int(&b,i);
+    }
+    for(i=0;i<100;++i){
+        assert(vector_data(b,i)==100-i-1);
+    }
+
+    destory_vector_int(&b);
+
     return 0;
 }
 

@@ -17,7 +17,8 @@
     extern struct vector_t_##type new_vector_##type##_with_capacity(unsigned int capacity);\
     extern void destory_vector_##type(struct vector_t_##type * v);\
     extern void push_back_vector_##type(struct vector_t_##type * vec, type value);\
-    extern void push_front_vector_##type(struct vector_t_##type * vec, type value);
+    extern void push_front_vector_##type(struct vector_t_##type * vec, type value);\
+    extern void reset_vector_##type(struct vector_t_##type* vec);
 
 #define vector_data(v,i)    ((v).data[i])
 #define vector_size(v)      ((v).size)
@@ -58,6 +59,11 @@
             assign_method(&vector_data(*vec,i),&vector_data(*vec,i-1)); \
         }\
         assign_method(&vec->data[0],&val);\
+    }\
+    void reset_vector_##type(struct vector_t_##type* vec){\
+        vec->capacity = 20;\
+        vec->size = 0;\
+        vec->data = realloc(vec->data,vec->capacity*sizeof(type));\
     }
 
 #ifdef USE_VECTOR_INT
