@@ -1,10 +1,10 @@
 #include "vector.h"
 #include <stdlib.h>
 #ifdef USE_VECTOR_INT
-Impl_Vector(int,SimpleTypeAssignMethod(int))
+Impl_Vector(int,GetSimpleTypeDescStruct(int))
 #endif
 
 
 #if (defined(USE_VECTOR_INT))
-Impl_SimpleTypeAssignMethod(int)
+Impl_Simple_Type_Desc_Struct(int)
 #endif

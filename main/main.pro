@@ -11,5 +11,6 @@ HEADERS += \
     cstl.h \
     vector.h \
     config.h \
-    assign_method.h
+    iterator.h \
+    type_desc_structs.h
 

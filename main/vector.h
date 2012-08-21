@@ -2,11 +2,11 @@
 #define VECTOR_H
 
 #include "config.h"
-#include "assign_method.h"
+#include "type_desc_structs.h"
 
 
 
-#define Declare_Vector_PROTOTYPE(type,assign_method)\
+#define Declare_Vector_PROTOTYPE(type)\
     struct vector_t_##type {\
         type* data;\
         unsigned int size;\
@@ -26,7 +26,7 @@
 #define vector_isValid(v)   ((v).data!=NULL)
 #define vector_isEmpty(v)   (vector_size(v)==0)
 
-#define Impl_Vector(type,assign_method)\
+#define Impl_Vector(type,type_description_struct)\
     struct vector_t_##type new_vector_##type(){\
         return new_vector_##type##_with_capacity(20);\
     }\
@@ -50,15 +50,15 @@
     }\
     void push_back_vector_##type( struct vector_t_##type * vec, type val ){\
         __increase_vector_##type##_size(vec,1);\
-        assign_method (&vec->data[vec->size-1],&val);\
+        type_description_struct.assign_method (&vec->data[vec->size-1],&val);\
     }\
     void push_front_vector_##type(struct vector_t_##type * vec, type val){\
         unsigned int i;\
         __increase_vector_##type##_size(vec,1);\
         for(i=vec->size-1;i!=0;--i){\
-            assign_method(&vector_data(*vec,i),&vector_data(*vec,i-1)); \
+            type_description_struct.assign_method(&vector_data(*vec,i),&vector_data(*vec,i-1)); \
         }\
-        assign_method(&vec->data[0],&val);\
+        type_description_struct.assign_method(&vec->data[0],&val);\
     }\
     void reset_vector_##type(struct vector_t_##type* vec){\
         vec->capacity = 20;\
@@ -67,7 +67,7 @@
     }
 
 #ifdef USE_VECTOR_INT
-Declare_Vector_PROTOTYPE(int,SimpleTypeAssignMethod(int))
+Declare_Vector_PROTOTYPE(int)
 #endif
 
 

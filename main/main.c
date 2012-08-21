@@ -6,6 +6,7 @@ int main(void)
 {
     int i=0;
     struct vector_t_int vectora = new_vector_int();
+
     assert(vector_isValid(vectora));
     assert(vector_size(vectora)==0);
     assert(vector_isEmpty(vectora));
