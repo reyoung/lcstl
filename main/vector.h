@@ -18,7 +18,8 @@
     extern void destory_vector_##type(struct vector_t_##type * v);\
     extern void push_back_vector_##type(struct vector_t_##type * vec, type value);\
     extern void push_front_vector_##type(struct vector_t_##type * vec, type value);\
-    extern void reset_vector_##type(struct vector_t_##type* vec);
+    extern void reset_vector_##type(struct vector_t_##type* vec);\
+    extern type pop_back_vector_##type(struct vector_t_##type *vec);
 
 #define vector_data(v,i)    ((v).data[i])
 #define vector_size(v)      ((v).size)
@@ -38,6 +39,12 @@
         return retv;\
     }\
     void destory_vector_##type(struct vector_t_##type * v){\
+        unsigned int i=0;\
+        if(type_description_struct.destory_method){\
+            for(;i<vector_size(*v);++i){\
+                type_description_struct.destory_method(&vector_data(*v,i));\
+            }\
+        }\
         free(v->data);\
         v->data = NULL;\
     }\
@@ -50,20 +57,34 @@
     }\
     void push_back_vector_##type( struct vector_t_##type * vec, type val ){\
         __increase_vector_##type##_size(vec,1);\
-        type_description_struct.assign_method (&vec->data[vec->size-1],&val);\
+        if(type_description_struct.assign_method)\
+            type_description_struct.assign_method (&vec->data[vec->size-1],&val);\
+        else\
+            vec->data[vec->size-1] = val;\
     }\
     void push_front_vector_##type(struct vector_t_##type * vec, type val){\
         unsigned int i;\
         __increase_vector_##type##_size(vec,1);\
         for(i=vec->size-1;i!=0;--i){\
-            type_description_struct.assign_method(&vector_data(*vec,i),&vector_data(*vec,i-1)); \
+            if(type_description_struct.assign_method)\
+                type_description_struct.assign_method(&vector_data(*vec,i),&vector_data(*vec,i-1)); \
+            else\
+                vector_data(*vec,i) = vector_data(*vec,i-1);\
         }\
-        type_description_struct.assign_method(&vec->data[0],&val);\
+        if(type_description_struct.assign_method)\
+            type_description_struct.assign_method(&vec->data[0],&val);\
+        else\
+            vec->data[0] = val;\
     }\
     void reset_vector_##type(struct vector_t_##type* vec){\
+        destory_vector_##type(vec);\
         vec->capacity = 20;\
         vec->size = 0;\
-        vec->data = realloc(vec->data,vec->capacity*sizeof(type));\
+        vec->data = malloc(vec->capacity*sizeof(type));\
+    }\
+    type pop_back_vector_##type(struct vector_t_##type * vec){\
+        assert(vector_size(*vec)!=0);\
+        return vec->data[--vec->size];\
     }
 
 #ifdef USE_VECTOR_INT

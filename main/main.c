@@ -40,7 +40,8 @@ int main(void)
     for(i=0;i<100;++i){
         assert(vector_data(b,i)==100-i-1);
     }
-
+    assert(pop_back_vector_int(&b)==0);
+    assert(vector_size(b)==99);
     destory_vector_int(&b);
 
     return 0;

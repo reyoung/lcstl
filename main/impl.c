@@ -1,5 +1,6 @@
 #include "vector.h"
 #include <stdlib.h>
+#include <assert.h>
 #ifdef USE_VECTOR_INT
 Impl_Vector(int,GetSimpleTypeDescStruct(int))
 #endif

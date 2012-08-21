@@ -7,6 +7,9 @@ DEFINES+=USE_VECTOR_INT
 SOURCES += main.c \
     impl.c
 
+#QMAKE_CFLAGS_DEBUG+= -E -o
+
+
 HEADERS += \
     cstl.h \
     vector.h \
