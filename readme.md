@@ -27,8 +27,8 @@ VERSION: pre alpha. V0.0.1PA
 
 预期的实现计划
 
-* slist,queue,stack in V0.0.2PA, due to 9-22, 2012
-* list,deque in V0.0.3PA, due to 10-22, 2012
+* slist,queue in V0.0.2PA, due to 9-22, 2012
+* list,deque,stack in V0.0.3PA, due to 10-22, 2012
 * set,map in V0.0.4PA, due to 11-22, 2012
 * multiset,multimap in V0.0.5PA, due to 12-22, 2012
 * algo in V0.0.5PA, due to 1-22, 2013
