@@ -88,6 +88,7 @@ void testVectorLongLong(){
         temp = i;
         assert(vector_data(va,i)==temp);
     }
+    assert(contains_vector_longlong(va,100));
     destory_vector_longlong(&va);
 }
 void testCstl(){
@@ -109,9 +110,9 @@ void testVectorBM(){
 
 int main(void)
 {
-//    testVectorInt();
-//    testVectorDouble();
-//    testVectorLongLong();
+    testVectorInt();
+    testVectorDouble();
+    testVectorLongLong();
     testVectorBM();
     return 0;
 }

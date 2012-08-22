@@ -22,8 +22,8 @@
     extern type pop_back_vector_##type(struct vector_t_##type *vec);\
     extern void clone_vector_##type(struct vector_t_##type * to,\
             struct vector_t_##type* from);\
-    extern void assign_vector_##type(struct vector_t_##type* vec,unsigned int count,type data);
-
+    extern void assign_vector_##type(struct vector_t_##type* vec,unsigned int count,type data);\
+    extern int contains_vector_##type(struct vector_t_##type vec,type data);
 
 #define vector_data(v,i)    ((v).data[i])
 #define vector_size(v)      ((v).size)
@@ -117,6 +117,21 @@
                 vector_data(*vec,i) = data;\
             }\
         }\
+    }\
+    int contains_vector_##type(struct vector_t_##type vec,type data){\
+        unsigned int i = 0;\
+        if(type_description_struct.cmp_method){\
+            for(;i<vector_size(vec);++i){\
+                if(type_description_struct.cmp_method(&vector_data(vec,i),&data)==0){\
+                    return -1;\
+                }\
+            }\
+        }else{\
+            for(;i<vector_size(vec);++i){\
+                if(vector_data(vec,i)==data)    return -1;\
+            }\
+        }\
+        return 0;\
     }
 
 #ifdef USE_VECTOR_INT
