@@ -1,7 +1,7 @@
 #ifndef TYPE_DESC_STRUCTS_H
 #define TYPE_DESC_STRUCTS_H
 #define TYPE_DESC_NAME_MAX 16
-
+#include "config.h"
 typedef void (*__assign_method_type)(void*, void*);
 typedef int (*__cmp_method_type)(void*, void*);
 typedef int (*__init_method_type)(void*);
@@ -36,9 +36,32 @@ struct type_desc_struct{
         return __##type##_desc;\
     }
 
-#if (defined(USE_VECTOR_INT))
-Declare_Simple_Type_Desc_Struct(int);
+#ifdef USE_SIMPLE_TYPE_INT
+Declare_Simple_Type_Desc_Struct(int)
 #endif
 
+#ifdef USE_SIMPLE_TYPE_DOUBLE
+Declare_Simple_Type_Desc_Struct(double)
+#endif
+
+#ifdef USE_SIMPLE_TYPE_FLOAT
+Declare_Simple_Type_Desc_Struct(float)
+#endif
+
+#ifdef USE_SIMPLE_TYPE_CHAR
+Declare_Simple_Type_Desc_Struct(char)
+#endif
+
+#ifdef USE_SIMPLE_TYPE_SHORT
+Declare_Simple_Type_Desc_Struct(short)
+#endif
+
+#ifdef USE_SIMPLE_TYPE_LONG
+Declare_Simple_Type_Desc_Struct(long)
+#endif
+
+#ifdef USE_SIMPLE_TYPE_LONGLONG
+Declare_Simple_Type_Desc_Struct(longlong)
+#endif
 
 #endif // TYPE_DESC_STRUCTS_H

@@ -112,5 +112,48 @@ Declare_Vector_Iterator_Prototype(int)
 #endif
 #endif
 
+#ifdef USE_VECTOR_DOUBLE
+Declare_Vector_PROTOTYPE(double)
+#ifdef USE_VECTOR_ITERATOR
+Declare_Vector_Iterator_Prototype(double)
+#endif
+#endif
+
+#ifdef USE_VECTOR_FLOAT
+Declare_Vector_PROTOTYPE(float)
+#ifdef USE_VECTOR_ITERATOR
+Declare_Vector_Iterator_Prototype(float)
+#endif
+#endif
+
+
+#ifdef USE_VECTOR_CHAR
+Declare_Vector_PROTOTYPE(char)
+#ifdef USE_VECTOR_ITERATOR
+Declare_Vector_Iterator_Prototype(char)
+#endif
+#endif
+
+#ifdef USE_VECTOR_SHORT
+Declare_Vector_PROTOTYPE(short)
+#ifdef USE_VECTOR_ITERATOR
+Declare_Vector_Iterator_Prototype(short)
+#endif
+#endif
+
+#ifdef USE_VECTOR_LONG
+Declare_Vector_PROTOTYPE(long)
+#ifdef USE_VECTOR_ITERATOR
+Declare_Vector_Iterator_Prototype(long)
+#endif
+#endif
+
+#ifdef USE_VECTOR_LONGLONG
+Declare_Vector_PROTOTYPE(longlong)
+#ifdef USE_VECTOR_ITERATOR
+Declare_Vector_Iterator_Prototype(longlong)
+#endif
+#endif
+
 
 #endif // VECTOR_H

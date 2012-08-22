@@ -59,16 +59,43 @@ void testVectorInt(){
     while(has_prev_vector_iterator(it)){
         printf("%d ",prev_vector_iterator(it));
     }
-
+    printf("\n");
     destory_vector_int(&b);
 
 }
-
-
+void testVectorDouble(){
+    int i=0;
+    struct vector_t_double va = new_vector_double();
+    struct vector_iterator_t_double it ;
+    for(i=0;i<100;++i){
+        push_back_vector_double(&va,1.0/(i+1));
+    }
+    it = new_vector_double_iterator(&va);
+    while(has_next_vector_iterator(it)){
+        printf("%f ",next_vector_iterator(it));
+    }
+    destory_vector_double(&va);
+}
+void testVectorLongLong(){
+    int i=0;
+    long long temp;
+    struct vector_t_longlong va = new_vector_longlong();
+    for(;i<10000;++i){
+        temp = i;
+        push_back_vector_longlong(&va,temp);
+    }
+    for(i=0;i<10000;++i){
+        temp = i;
+        assert(vector_data(va,i)==temp);
+    }
+    destory_vector_longlong(&va);
+}
 
 int main(void)
 {
     testVectorInt();
+    testVectorDouble();
+    testVectorLongLong();
     return 0;
 }
 
