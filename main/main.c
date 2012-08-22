@@ -90,12 +90,29 @@ void testVectorLongLong(){
     }
     destory_vector_longlong(&va);
 }
+void testCstl(){
+    struct vector_t_int va,vb;
+    va = new_vector_int();
+    vb = new_vector_int();
+
+    assign_vector_int(&va,300,-39);
+    clone_vector_int(&vb,&va);
+    destory_vector_int(&va);
+    destory_vector_int(&vb);
+}
+
+void testVectorBM(){
+    unsigned int i;
+    for(i=0;i<100000;++i)
+        testCstl();
+}
 
 int main(void)
 {
-    testVectorInt();
-    testVectorDouble();
-    testVectorLongLong();
+//    testVectorInt();
+//    testVectorDouble();
+//    testVectorLongLong();
+    testVectorBM();
     return 0;
 }
 

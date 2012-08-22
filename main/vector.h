@@ -21,7 +21,8 @@
     extern void reset_vector_##type(struct vector_t_##type* vec);\
     extern type pop_back_vector_##type(struct vector_t_##type *vec);\
     extern void clone_vector_##type(struct vector_t_##type * to,\
-            struct vector_t_##type* from);
+            struct vector_t_##type* from);\
+    extern void assign_vector_##type(struct vector_t_##type* vec,unsigned int count,type data);
 
 
 #define vector_data(v,i)    ((v).data[i])
@@ -53,10 +54,10 @@
     }\
     static void __increase_vector_##type##_size(struct vector_t_##type * vec,unsigned int inc_val){\
         vec->size+= inc_val;\
-        if(vec->size >= vec->capacity){\
+        while(vec->size >= vec->capacity){\
             vec->capacity <<=1;\
-            vec->data =realloc(vec->data,vec->capacity*sizeof(type));\
         }\
+        vec->data =realloc(vec->data,vec->capacity*sizeof(type));\
     }\
     void push_back_vector_##type( struct vector_t_##type * vec, type val ){\
         __increase_vector_##type##_size(vec,1);\
@@ -102,6 +103,19 @@
             }\
         }else{\
             memcpy(to->data,from->data,(int)to->size*sizeof(type));\
+        }\
+    }\
+    void assign_vector_##type(struct vector_t_##type* vec,unsigned int count,type data){\
+        unsigned int i=vector_size(*vec);\
+        __increase_vector_##type##_size(vec,count);\
+        if(type_description_struct.assign_method){\
+            for(;i<vector_size(*vec);++i){\
+                type_description_struct.assign_method(&vector_data(*vec,i),&data);\
+            }\
+        } else {\
+            for(;i<vector_size(*vec);++i){\
+                vector_data(*vec,i) = data;\
+            }\
         }\
     }
 
