@@ -2,11 +2,11 @@
 #include "cstl.h"
 #include <assert.h>
 #include <stdio.h>
-int main(void)
-{
+
+void testVectorInt(){
     int i=0;
     struct vector_t_int vectora = new_vector_int();
-
+    struct vector_iterator_t_int  it;
     assert(vector_isValid(vectora));
     assert(vector_size(vectora)==0);
     assert(vector_isEmpty(vectora));
@@ -42,8 +42,33 @@ int main(void)
     }
     assert(pop_back_vector_int(&b)==0);
     assert(vector_size(b)==99);
+    it = new_vector_int_iterator(&b);
+    assert(it.pos == 0);
+    assert(it.vec == &b);
+
+    clone_vector_int(&vectora,&b);
+    assert(vector_size(vectora)==99);
+
+    for(i=0;i<99;++i){
+        assert(vector_data(vectora,i)==100-i-1);
+    }
+    while(has_next_vector_iterator(it)){
+        printf("%d ",next_vector_iterator(it));
+    }
+    printf("\n");
+    while(has_prev_vector_iterator(it)){
+        printf("%d ",prev_vector_iterator(it));
+    }
+
     destory_vector_int(&b);
 
+}
+
+
+
+int main(void)
+{
+    testVectorInt();
     return 0;
 }
 

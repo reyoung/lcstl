@@ -3,7 +3,7 @@
 
 #include "config.h"
 #include "type_desc_structs.h"
-
+#include "iterator.h"
 
 
 #define Declare_Vector_PROTOTYPE(type)\
@@ -19,7 +19,10 @@
     extern void push_back_vector_##type(struct vector_t_##type * vec, type value);\
     extern void push_front_vector_##type(struct vector_t_##type * vec, type value);\
     extern void reset_vector_##type(struct vector_t_##type* vec);\
-    extern type pop_back_vector_##type(struct vector_t_##type *vec);
+    extern type pop_back_vector_##type(struct vector_t_##type *vec);\
+    extern void clone_vector_##type(struct vector_t_##type * to,\
+            struct vector_t_##type* from);
+
 
 #define vector_data(v,i)    ((v).data[i])
 #define vector_size(v)      ((v).size)
@@ -85,10 +88,28 @@
     type pop_back_vector_##type(struct vector_t_##type * vec){\
         assert(vector_size(*vec)!=0);\
         return vec->data[--vec->size];\
+    }\
+    void clone_vector_##type(struct vector_t_##type * to,\
+                struct vector_t_##type* from){\
+        unsigned int i=0;\
+        destory_vector_##type(to);\
+        to->capacity = from->capacity;\
+        to->size = from->size;\
+        to->data = realloc(to->data,to->capacity*sizeof(type));\
+        if(type_description_struct.assign_method){\
+            for(;i<to->size;++i){\
+                type_description_struct.assign_method(&vector_data(*to,i),&vector_data(*from,i));\
+            }\
+        }else{\
+            memcpy(to->data,from->data,(int)to->size*sizeof(type));\
+        }\
     }
 
 #ifdef USE_VECTOR_INT
 Declare_Vector_PROTOTYPE(int)
+#ifdef USE_VECTOR_ITERATOR
+Declare_Vector_Iterator_Prototype(int)
+#endif
 #endif
 
 

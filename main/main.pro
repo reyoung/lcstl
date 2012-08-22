@@ -3,6 +3,7 @@ CONFIG += console
 CONFIG -= qt
 
 DEFINES+=USE_VECTOR_INT
+DEFINES+=USE_VECTOR_ITERATOR
 
 SOURCES += main.c \
     impl.c
