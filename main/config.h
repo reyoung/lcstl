@@ -21,7 +21,7 @@ typedef long long longlong;
 #define USE_SIMPLE_TYPE_SHORT
 #endif
 
-#if (defined(USE_VECTOR_INT))
+#if (defined(USE_VECTOR_INT)||defined(USE_SLIST_INT))
 #define USE_SIMPLE_TYPE_INT
 #endif
 

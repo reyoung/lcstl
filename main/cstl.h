@@ -3,7 +3,7 @@
 
 #include "type_desc_structs.h"
 #include "vector.h"
-
+#include "slist.h"
 
 
 #endif // CSTL_H

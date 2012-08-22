@@ -1,4 +1,5 @@
 #include "vector.h"
+#include "slist.h"
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
@@ -52,9 +53,18 @@ Impl_Vector_Iterator(longlong)
 #endif
 #endif
 
-
-
 //! End Vector Impl Defines
+
+
+
+//! Start SList Impl Defines
+
+#ifdef USE_SLIST_INT
+Impl_Slist_Simple(int)
+#endif
+
+//! End SList Impl Defines
+
 
 //! Start Type Desc Impl Defines
 
