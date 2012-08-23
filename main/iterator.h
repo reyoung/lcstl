@@ -1,6 +1,7 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
 #include "vector.h"
+//#include "slist.h"
 
 #define Declare_Vector_Iterator_Prototype(type)\
     struct vector_iterator_t_##type{\
@@ -24,6 +25,26 @@
                             (struct vector_t_##type* vec){\
         struct vector_iterator_t_##type retv;\
         retv.vec = vec; retv.pos = 0;\
+        return retv;\
+    }
+
+
+
+
+#define Declare_SList_Iterator_Prototype(type)\
+    struct slist_t_##type##_node;\
+    struct slist_iterator_t_##type {\
+        struct slist_t_##type##_node * head;\
+        struct slist_t_##type##_node * cur;\
+    };\
+    extern struct slist_iterator_t_##type new_slist_##type##_iterator\
+            (struct slist_t_##type* slist);
+
+#define Impl_Slist_Iterator(type)\
+    struct slist_iterator_t_##type new_slist_##type##_iterator\
+                (struct slist_t_##type* slist){\
+        struct slist_iterator_t_##type retv;\
+        retv.head = retv.cur = slist->head;\
         return retv;\
     }
 

@@ -1,6 +1,6 @@
 #ifndef SLIST_H
 #define SLIST_H
-
+#include "iterator.h"
 
 #define Declare_SList_Prototype(type)\
     struct slist_t_##type##_node {\
@@ -26,6 +26,9 @@
 
 #ifdef USE_SLIST_INT
 Declare_SList_Prototype(int)
+#ifdef USE_SLIST_ITERATOR
+Declare_SList_Iterator_Prototype(int)
+#endif
 #endif
 
 #endif // SLIST_H

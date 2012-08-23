@@ -110,8 +110,11 @@
 
 void testSListCtor(){
     struct slist_t_int la = new_slist_int();
+    struct slist_iterator_t_int it = new_slist_int_iterator(&la);
     assert(la.head == NULL);
     assert(slist_isEmpty(la));
+    assert(la.head == it.cur);
+    assert(la.head == it.head);
 }
 
 int main(void)

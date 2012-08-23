@@ -1,8 +1,10 @@
+#include "type_desc_structs.h"
 #include "vector.h"
 #include "slist.h"
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+
 //! Start Vector Impl Defines.
 #ifdef USE_VECTOR_INT
 Impl_Vector(int,GetSimpleTypeDescStruct(int))
@@ -61,6 +63,9 @@ Impl_Vector_Iterator(longlong)
 
 #ifdef USE_SLIST_INT
 Impl_Slist_Simple(int)
+#ifdef USE_SLIST_ITERATOR
+Impl_Slist_Iterator(int)
+#endif
 #endif
 
 //! End SList Impl Defines
