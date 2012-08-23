@@ -111,10 +111,21 @@
 void testSListCtor(){
     struct slist_t_int la = new_slist_int();
     struct slist_iterator_t_int it = new_slist_int_iterator(&la);
+    int i;
+
     assert(la.head == NULL);
     assert(slist_isEmpty(la));
     assert(la.head == it.cur);
     assert(la.head == it.head);
+
+    for(i=0;i<100;++i){
+        push_back_slist_int(&la,i);
+    }
+    assert(la.head!=NULL);
+    assert(la.head->data==0);
+
+    assert(slist_size_int(la)==100);
+    destory_slist_int(&la);
 }
 
 int main(void)

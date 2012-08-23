@@ -62,10 +62,8 @@ Impl_Vector_Iterator(longlong)
 //! Start SList Impl Defines
 
 #ifdef USE_SLIST_INT
-Impl_Slist_Simple(int)
-#ifdef USE_SLIST_ITERATOR
 Impl_Slist_Iterator(int)
-#endif
+Impl_Slist_Simple(int)
 #endif
 
 //! End SList Impl Defines

@@ -48,4 +48,6 @@
         return retv;\
     }
 
+#define to_back_slist_iterator(it)\ do{it.cur = 0;}while(0)
+
 #endif // ITERATOR_H
