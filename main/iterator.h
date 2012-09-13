@@ -1,6 +1,6 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
-#include "vector.h"
+//#include "vector.h"
 //#include "slist.h"
 
 #define Declare_Vector_Iterator_Prototype(type)\
@@ -40,14 +40,31 @@
     extern struct slist_iterator_t_##type new_slist_##type##_iterator\
             (struct slist_t_##type* slist);
 
+
+
+#define has_next_slist_iterator(it)\
+    ((it).cur==NULL ||(it).cur->next!=NULL)
+
+#define next_slist_iterator(it)\
+    (((it).cur)\
+    ?(((it).cur=(it).cur->next)?(it).cur->data:0)\
+    :((it).cur=(it.head))?(it).cur->data:0)
+
+#define peek_next_slist_iterator(it)\
+    ((it).cur?(it.cur->next->data):(it.head->data))
+
+#define to_back_slist_iterator(it)\
+    do{it.cur = 0;}while(0)
+
 #define Impl_Slist_Iterator(type)\
     struct slist_iterator_t_##type new_slist_##type##_iterator\
                 (struct slist_t_##type* slist){\
         struct slist_iterator_t_##type retv;\
-        retv.head = retv.cur = slist->head;\
+        retv.head  = slist->head;\
+        retv.cur = NULL;\
         return retv;\
     }
 
-#define to_back_slist_iterator(it)\ do{it.cur = 0;}while(0)
+
 
 #endif // ITERATOR_H

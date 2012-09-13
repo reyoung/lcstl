@@ -123,8 +123,15 @@ void testSListCtor(){
     }
     assert(la.head!=NULL);
     assert(la.head->data==0);
+    it = new_slist_int_iterator(&la);
+    for(i=0;i<100;++i){
+        assert(has_next_slist_iterator(it));
+        assert(peek_next_slist_iterator(it)==i);
+        assert(next_slist_iterator(it)==i);
+    }
 
     assert(slist_size_int(la)==100);
+
     destory_slist_int(&la);
 }
 
@@ -135,6 +142,7 @@ int main(void)
 //    testVectorLongLong();
 //    testVectorBM();
     testSListCtor();
+    printf("OK\n");
     return 0;
 }
 
